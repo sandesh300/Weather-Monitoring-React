@@ -1,13 +1,29 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base
+
+/* Navbar.css */
+.navbar {
+  background-color: #333;
+  padding: 1rem;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-list li {
+  display: inline;
+}
+
+.navbar-list li a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-list li a:hover {
+  background-color: #555;
+  border-radius: 4px;
 }
