@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# Real-Time Weather Monitoring and Summarization System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Java-based real-time data processing system for monitoring weather conditions across major metro cities in India, with summarized insights through daily rollups and configurable alerts. This system continuously fetches data from the OpenWeatherMap API and provides aggregate metrics and alert notifications based on user-defined thresholds.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Real-Time Weather Monitoring**: Continuously retrieves weather data at a configurable interval (default every 5 minutes) from the OpenWeatherMap API for Indian metro cities.
+- **Temperature Conversion**: Converts temperature values from Kelvin to Celsius (default) or Fahrenheit based on user preference.
+- **Daily Weather Summary**: Provides a daily summary, including:
+  - Average, maximum, and minimum temperatures.
+  - Dominant weather condition based on frequency (e.g., “Rain” if most updates report rain).
+- **Configurable Alerts**: Alerts for weather conditions breaching user-defined thresholds (e.g., temperature exceeding 35°C).
+- **Data Storage**: Stores daily summaries and historical data in MongoDB Atlas.
+- **Visualizations**: Displays daily summaries, historical trends, and triggered alerts (React frontend).
+- **Bonus**: Supports additional weather parameters (e.g., humidity, wind speed) in rollups.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Backend**: Java, Spring Boot
+- **Frontend**: React
+- **Database**: MongoDB Atlas
+- **External API**: OpenWeatherMap API
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup Instructions
 
-### `npm run build`
+### 1. Clone Repository
+```bash
+git clone https://github.com/your-repo/weather-monitoring-system.git
+cd weather-monitoring-system
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. API Key for OpenWeatherMap
+Sign up for a free API key from [OpenWeatherMap](https://openweathermap.org/) and add it to your environment variables:
+```bash
+export OPENWEATHER_API_KEY=your_api_key
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Database Setup
+ Run the following to start MongoDB Atlas:
+ - Add database configuration in application.properties file 
+```# MongoDB Configuration
+spring.data.mongodb.uri={Your MongoDB URL}
+spring.data.mongodb.database=weather_monitoring
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 4. Run the Backend
+Navigate to the backend directory and start the Spring Boot server:
+```bash
+cd backend
+./mvnw spring-boot:run
+```
 
-### `npm run eject`
+### 5. Run the Frontend
+Navigate to the frontend directory and start the React server:
+```bash
+cd frontend
+npm install
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Configuration
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Environment Variables
+Configure the following in the `.env` file or directly in your environment:
+- `OPENWEATHER_API_KEY`: API key from OpenWeatherMap.
+- `DB_URL`: MongoDB Atlas connection URL.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 2. Interval Configuration
+In `application.properties`, set the interval for weather data retrieval (default: 5 minutes).
+```properties
+weather.poll.interval=300000  # milliseconds
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Application Modules
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 1. Weather Monitoring
+- **Retrieves data** at intervals from the OpenWeatherMap API.
+- Parses and converts temperature data (Kelvin to Celsius/Fahrenheit).
+  
+### 2. Rollups and Aggregates
+- **Daily Summaries**: Calculates daily averages, maximums, minimums, and dominant weather conditions based on frequency.
+- **Alerts**: Configurable thresholds for temperature and weather conditions. Alerts triggered on console or as email notifications when thresholds are breached.
 
-### Code Splitting
+### 3. Visualization
+Displays daily summaries, historical trends, and alerts using React charts and components.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Testing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Test Cases
 
-### Making a Progressive Web App
+1. **System Setup**: Validate connection to OpenWeatherMap API.
+2. **Data Retrieval**: Simulate API calls at configurable intervals and parse responses.
+3. **Temperature Conversion**: Validate Kelvin to Celsius/Fahrenheit conversion.
+4. **Daily Summary Calculation**: Test rollup and aggregation functions for accuracy.
+5. **Alerting Thresholds**: Test alerts for temperature/weather condition breaches.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Running Tests
+Run the test suite:
+```bash
+./mvnw test
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Dependencies
 
-### Deployment
+- **Backend**:
+  - Java 11 or above
+  - Spring Boot
+  - MongoDB Atlas
+- **Frontend**:
+  - Node.js and npm
+  - React.js
+- **Database**:
+  - MongoDB Atlas account
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Design Choices
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Real-Time Processing**: Chose Spring Boot for efficient background data fetching and processing.
+- **Storage**: MongoDB Atlas for its scalability and simplicity in handling JSON-like data (weather data is unstructured).
+- **Frontend**: React.js provides a dynamic interface for displaying real-time weather data and historical trends.
+  
+---
+
