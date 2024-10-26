@@ -78,6 +78,8 @@ weather.poll.interval=300000  # milliseconds
 ```
 
 ---
+## Backend API 
+### API Documentation - https://walnut-wrist-9da.notion.site/Real-Time-Data-Processing-System-for-Weather-Monitoring-API-Documentation-12ba272bc3e58074b84cd1edd31295b9
 
 ## Application Modules
 
@@ -95,7 +97,7 @@ Displays daily summaries, historical trends, and alerts using React charts and c
 ---
 
 ## Testing
-
+### Test Cases Documentation - https://walnut-wrist-9da.notion.site/Real-Time-Data-Processing-System-for-Weather-Monitoring-Test-Cases-Documentation-12ba272bc3e5808aba3ae74cd9033592
 ### Test Cases
 
 1. **System Setup**: Validate connection to OpenWeatherMap API.
