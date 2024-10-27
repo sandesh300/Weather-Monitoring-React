@@ -1,32 +1,35 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Dashboard from './components/Dashboard';
+import HomePage from './components/Homepage';
+import WeatherData from './components/WeatherData';
 import WeatherAlerts from './components/WeatherAlerts';
-import CityWeather from './components/CityWeather';
-import WeatherHistory from './components/WeatherHistory';
-import AlertSettings from './components/AlertSettings';
-import WeatherSimulator from './components/WeatherSimulator';
+import { AlertProvider } from './context/AlertContext';
+import AlertConfigurationPage from './components/AlertConfiguration';
+import DailySummaryPage from './components/DailySummary';
+import WeatherForecastPage from './components/WeatherForecast';
 
-
-function App() {
+const App = () => {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-100">
-        <Navbar />
-        <div className="container mx-auto px-4 py-8">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/alerts" element={<WeatherAlerts />} />
-            <Route path="/city/:cityName" element={<CityWeather />} />
-            <Route path="/history" element={<WeatherHistory />} />
-            <Route path="/settings" element={<AlertSettings />} />
-            <Route path="/simulate" element={<WeatherSimulator />} />
-          </Routes>
+    <BrowserRouter>
+      <AlertProvider>
+        <div className="min-h-screen bg-gray-100">
+          <Navbar />
+          <div className="container mx-auto px-4 py-8">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/weather" element={<WeatherData />} />
+              <Route path="/alerts" element={<WeatherAlerts />} />
+              <Route path="/alert-config" element={<AlertConfigurationPage />} />
+              <Route path="/summary" element={<DailySummaryPage />} />
+              <Route path="/forecast" element={<WeatherForecastPage />} />
+              
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </AlertProvider>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
